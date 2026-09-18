@@ -815,8 +815,8 @@ function displayUrl(url){ return String(url).replace(/^https?:\/\//,'').replace(
 
 var PROJECTS = [
   { id:'tic-tac-toe', title:'Tic Tac Toe', desc:'A classic two-player Tic Tac Toe game built in C, played right in the terminal.', tags:['C'], category:'c', icon:'code', code:'https://github.com/Nimbu-paani/Tic-Tac-Toe' },
-  { id:'guess-the-number', title:'Guess the Number', desc:'A number-guessing game in C++ \u2014 the computer picks a number and you try to find it in as few tries as possible.', tags:['C'], category:'c', icon:'code', code:'https://github.com/Nimbu-paani/Guess-the-number' },
-  { id:'rock-paper-scissors', title:'Rock Paper Scissors', desc:'A terminal-based Rock Paper Scissors game in C++, played against the computer.', tags:['C'], category:'c', icon:'code', code:'https://github.com/Nimbu-paani/Rock-Paper-Scissors' }
+  { id:'guess-the-number', title:'Guess the Number', desc:'A number-guessing game in C++ \u2014 the computer picks a number and you try to find it in as few tries as possible.', tags:['C++'], category:'cpp', icon:'code', code:'https://github.com/Nimbu-paani/Guess-the-number' },
+  { id:'rock-paper-scissors', title:'Rock Paper Scissors', desc:'A terminal-based Rock Paper Scissors game in C++, played against the computer.', tags:['C++'], category:'cpp', icon:'code', code:'https://github.com/Nimbu-paani/Rock-Paper-Scissors' }
 ];
 
 var EXPERIENCE = [];
@@ -1270,10 +1270,11 @@ function renderProjectGrid(body, cat){
 function openProjects(){
   return createWindow({ type:'projects', title:'~/projects', icon:'folder', width:700, height:540, minW:420, minH:360, singleton:true, content:function(body){
     body.innerHTML = '<div class="app-scroll app-pad"><div class="proj-filters" id="proj-filters"></div><div class="proj-grid" id="proj-grid"></div></div>';
-    var cats = ['all','c'];
+    var cats = ['all','c','cpp'];
+    var catLabels = { all:'All', c:'C', cpp:'C++' };
     var filtersEl = $('#proj-filters', body);
     cats.forEach(function(c){
-      var b = ce('button', 'proj-filter'+(c==='all'?' active':''), c==='all' ? 'All' : c[0].toUpperCase()+c.slice(1));
+      var b = ce('button', 'proj-filter'+(c==='all'?' active':''), catLabels[c] || c);
       b.dataset.cat = c;
       b.addEventListener('click', function(){
         $$('.proj-filter', filtersEl).forEach(function(x){ x.classList.remove('active'); });
